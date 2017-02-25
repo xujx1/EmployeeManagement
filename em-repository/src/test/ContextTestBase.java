@@ -1,6 +1,9 @@
 import com.architecture.em.config.RootConfig;
 import com.architecture.em.dao.UserDao;
 import com.architecture.em.entity.User;
+import com.github.pagehelper.PageHelper;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
@@ -17,12 +20,23 @@ public class ContextTestBase {
     @Inject
     private UserDao userDao;
 
-    @Test
-    public void test(){
-        User user=new User();
-        user.setUserName("ceshi");
-        userDao.count(user);
-        userDao.insert(user);
+    @Before
+    public void before(){
+        System.out.println("=====================================");
     }
 
+    @After
+    public void after(){
+        System.out.println("=====================================");
+    }
+
+    @Test
+    public void test(){
+
+        PageHelper.startPage(1,1);
+        User user=new User();
+        user.setUserName("ceshi");
+
+        userDao.select(user).stream().forEach(System.out::println);
+    }
 }

@@ -1,6 +1,7 @@
 package com.architecture.em.aspect;
 
 import com.alibaba.fastjson.JSON;
+import com.architecture.em.utils.exception.ExceptionHandlerUtil;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
@@ -15,7 +16,7 @@ public class LogInterceptor {
     private static final Logger LOGGER = LoggerFactory.getLogger(LogInterceptor.class);
 
 
-    @Pointcut("execution(public * com.architecture.em.service.impl.*.*(..))")
+    @Pointcut("execution(public * com.architecture.em.service.impl.*.*(..)) and !@annotation(com.architecture.em.annotation.NoLog)")
     public void performance() {
     }
 
@@ -96,5 +97,6 @@ public class LogInterceptor {
                 "." + joinPoint.getSignature().getName() +
                 "[exception]==>";
         LOGGER.error(logMsg, cause);
+        ExceptionHandlerUtil.wrapAndThrowServiceException(cause);
     }
 }
