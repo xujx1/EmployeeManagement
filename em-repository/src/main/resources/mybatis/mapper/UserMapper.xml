@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.architecture.em.mapper.UserMapper">
-	<resultMap id="BaseResultMap" type="com.architecture.em.entity.User">
+<mapper namespace="com.architecture.em.mapper.user.UserMapper">
+	<resultMap id="BaseResultMap" type="com.architecture.em.po.user.UserPo">
 		<!-- WARNING - @mbggenerated -->
 		<constructor>
 			<idArg column="id" jdbcType="INTEGER" javaType="java.lang.Integer" />

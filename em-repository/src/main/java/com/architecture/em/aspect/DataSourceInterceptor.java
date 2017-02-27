@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
 public class DataSourceInterceptor {
     private static final Logger LOGGER = LoggerFactory.getLogger(DataSourceInterceptor.class);
 
-    @Around(value = "execution(public * com.architecture.em.dao.impl.*.*(..)) and @annotation(com.architecture.em.annotation.ReadOnly)")
+    @Around(value = "execution(public * com.architecture.em.dao.*.impl.*.*(..)) and @annotation(com.architecture.em.annotation.ReadOnly)")
     public Object around(ProceedingJoinPoint joinPoint) {
         DataSourceTypeManager.set(DataSources.READ);
         LOGGER.info("Data_Source:{}", DataSourceTypeManager.get().name());

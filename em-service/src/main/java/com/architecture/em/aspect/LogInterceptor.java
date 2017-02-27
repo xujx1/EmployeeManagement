@@ -16,7 +16,7 @@ public class LogInterceptor {
     private static final Logger LOGGER = LoggerFactory.getLogger(LogInterceptor.class);
 
 
-    @Pointcut("execution(public * com.architecture.em.service.impl.*.*(..)) and !@annotation(com.architecture.em.annotation.NoLog)")
+    @Pointcut("execution(public * com.architecture.em.service.user.impl.*.*(..)) and !@annotation(com.architecture.em.annotation.NoLog)")
     public void performance() {
     }
 

@@ -1,6 +1,6 @@
 import com.architecture.em.config.RootConfig;
-import com.architecture.em.dao.UserDao;
-import com.architecture.em.entity.User;
+import com.architecture.em.dao.user.UserDao;
+import com.architecture.em.po.user.UserPo;
 import com.github.pagehelper.PageHelper;
 import org.junit.After;
 import org.junit.Before;
@@ -34,7 +34,7 @@ public class ContextTestBase {
     public void test(){
 
         PageHelper.startPage(1,1);
-        User user=new User();
+        UserPo user=new UserPo();
         user.setUserName("ceshi");
 
         userDao.select(user).stream().forEach(System.out::println);
