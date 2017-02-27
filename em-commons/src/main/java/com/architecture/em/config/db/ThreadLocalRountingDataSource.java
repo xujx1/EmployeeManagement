@@ -10,6 +10,4 @@ public class ThreadLocalRountingDataSource extends AbstractRoutingDataSource {
     protected Object determineCurrentLookupKey() {
         return DataSourceTypeManager.get();
     }
-
-
 }

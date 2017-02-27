@@ -1,7 +1,7 @@
 package com.architecture.em.config;
 
 import com.architecture.em.config.aop.AopConfig;
-import com.architecture.em.config.cache.EhCacheConfig;
+import com.architecture.em.config.cache.CacheConfig;
 import com.architecture.em.config.db.DataSources;
 import com.architecture.em.config.db.ThreadLocalRountingDataSource;
 import com.architecture.em.config.executor.ExecutorConfig;
@@ -14,7 +14,6 @@ import com.architecture.em.config.rest.RestConfig;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.github.pagehelper.PageHelper;
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.*;
@@ -30,15 +29,18 @@ import javax.sql.DataSource;
 import java.beans.PropertyVetoException;
 import java.sql.SQLException;
 import java.util.Map;
-import java.util.Properties;
 import java.util.concurrent.ConcurrentHashMap;
 
 @Configuration
 @PropertySource({"classpath:application.properties"})
 @EnableWebMvc
-@ComponentScan(basePackages = "com.architecture.em")
-@Import(value = {AopConfig.class, RedisConfig.class, JmsConfig.class, MongoConfig.class, EhCacheConfig.class, ExecutorConfig.class, RestConfig.class, MybatisConfig.class, SqlSessionFactoryConfig.class})
+@ComponentScan(basePackages = "com.architecture.em",
+        includeFilters = {@ComponentScan.Filter(type = FilterType.ANNOTATION, value = EnableWebMvc.class)})
+@Import(value = {AopConfig.class, RedisConfig.class, JmsConfig.class, MongoConfig.class, CacheConfig.class, ExecutorConfig.class, RestConfig.class, MybatisConfig.class, SqlSessionFactoryConfig.class})
 public class RootConfig {
+    @Inject
+    private ObjectMapper objectMapper;
+
 
     @Value("${jdbc.read.url}")
     private String readUrl;
@@ -58,10 +60,6 @@ public class RootConfig {
 
     @Value("${jdbc.master.password}")
     private  String masterPassword;
-
-
-    @Inject
-    private ObjectMapper objectMapper;
 
     @Bean
     public static PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer() {
@@ -145,15 +143,5 @@ public class RootConfig {
         return datasource;
 
     }
-
-    private static PageHelper pageHelper() {
-        PageHelper pageHelper = new PageHelper();
-        Properties properties = new Properties();
-        properties.setProperty("dialect", "mysql");
-        pageHelper.setProperties(properties);
-        return pageHelper;
-    }
-
-
 
 }

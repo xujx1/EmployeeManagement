@@ -28,23 +28,23 @@ public class MongoConfig {
     @Value(("${mongodb.password}"))
     private String password;
 
-    @Autowired
-    private Mongo mongo;
+  /*  @Autowired
+    private Mongo mongo;*/
 
 
-    @Bean
+   /* @Bean
     public MongoClientFactoryBean mongo() {
         MongoClientFactoryBean mongo = new MongoClientFactoryBean();
         //设置数据库用户名密码
-     /*   MongoCredential mongoCredential = MongoCredential.createMongoCRCredential(user, dbName, password.toCharArray());*/
+     *//*   MongoCredential mongoCredential = MongoCredential.createMongoCRCredential(user, dbName, password.toCharArray());*//*
         mongo.setHost(url);
         mongo.setPort(post);
-       /* mongo.setCredentials(new MongoCredential[]{mongoCredential});*/
+       *//* mongo.setCredentials(new MongoCredential[]{mongoCredential});*//*
         return mongo;
-    }
+    }*/
 
-    @Bean
+   /* @Bean
     public MongoTemplate mongoTemplate() {
         return new MongoTemplate(mongo, dbName);
-    }
+    }*/
 }
