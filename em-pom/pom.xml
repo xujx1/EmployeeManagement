@@ -76,7 +76,7 @@
         <!-- aspectjrt properties end -->
 
         <!-- ehcache properties start -->
-        <ehcache.version>2.10.3</ehcache.version>
+        <guava.version>19.0</guava.version>
         <!-- ehcache properties end -->
 
         <!-- time operator properties start-->
@@ -326,11 +326,10 @@
 
 
         <dependency>
-            <groupId>net.sf.ehcache</groupId>
-            <artifactId>ehcache</artifactId>
-            <version>${ehcache.version}</version>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>${guava.version}</version>
         </dependency>
-
 
         <!--json-->
         <dependency>
