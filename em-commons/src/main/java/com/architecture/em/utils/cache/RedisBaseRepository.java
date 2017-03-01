@@ -29,4 +29,13 @@ public class RedisBaseRepository {
         this.deleteCache(key);
         this.saveCache(key, value, time, timeUnit);
     }
+
+    public Boolean setIfAbsent(String key,String value){
+       return redisTemplate.opsForValue().setIfAbsent(key, value);
+    }
+
+    public Boolean expire(String key, long timeout, TimeUnit unit){
+      return  redisTemplate.expire(key, timeout, unit);
+    }
+
 }

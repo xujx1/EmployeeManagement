@@ -46,4 +46,11 @@ public class RedisOperationUtil {
         redisBaseRepository.updateCache(key, value, time, timeUnit);
     }
 
+    public static Boolean setIfAbsent(String key,String value){
+       return redisBaseRepository.setIfAbsent(key,value);
+    }
+
+    public static Boolean expire(String key, long timeout, TimeUnit unit){
+        return redisBaseRepository.expire(key, timeout, unit);
+    }
 }
